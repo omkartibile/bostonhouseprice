@@ -17,7 +17,7 @@ jobs:
 
       # Build and deploy a Docker container to Render.
       - name: Build and Deploy to Render
-        uses: render-examples/render-deploy@v2.323.0 # GitHub action for Render
+        uses: bostonhouseprice/render-deploy@v1.0.0 # GitHub action for Render
         with:
           # The name of your Render service.
           service_name: ${{ secrets.RENDER_SERVICE_NAME }}
