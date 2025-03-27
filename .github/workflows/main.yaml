@@ -1,0 +1,40 @@
+# Your workflow name.
+name: Deploy to Render.
+
+# Run workflow on every push to main branch.
+on:
+  push:
+    branches: [main]
+
+# Your workflows jobs.
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Check-out your repository.
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Build and deploy a Docker container to Render.
+      - name: Build and Deploy to Render
+        uses: render-examples/render-deploy@v1.0.0 # GitHub action for Render
+        with:
+          # The name of your Render service.
+          service_name: ${{ secrets.RENDER_SERVICE_NAME }}
+
+          # Your Render API key.
+          render_api_key: ${{ secrets.RENDER_API_KEY }}
+
+          # The Dockerfile path (if it's in the root, keep it as is).
+          dockerfile_directory: ./
+
+          # The name of the Dockerfile (if it's named differently, specify here).
+          dockerfile_name: Dockerfile
+
+          # Additional options for the docker build command (if needed).
+          docker_options: "--no-cache"
+
+          # Specify the environment variables required for your application.
+          env_vars: |
+            VAR1=value1
+            VAR2=value2
